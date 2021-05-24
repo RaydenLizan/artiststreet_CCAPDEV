@@ -272,8 +272,7 @@ $(document).ready(function(){
                 $(this).closest('div').children().eq(3).css('background-color', '');
             }
             
-            if(username === owner)
-                exp = parseInt(exp) + 1;
+            exp = parseInt(exp) + 1;
         
         }           
         

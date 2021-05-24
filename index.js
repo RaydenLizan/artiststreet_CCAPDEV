@@ -56,7 +56,7 @@ hbs.registerHelper('equal', function (a, b) {
 });
 
 dotenv.config();
-port = process.env.PORT || "3000";
+port = process.env.PORT;
 hostname = process.env.HOSTNAME;
 
 app.use(express.urlencoded({extended: true}));

@@ -1,0 +1,22 @@
+<div class="header">
+
+    <img src="/images/logo.png" id="logo">
+    <a href="searchPaintingLoggedIn.html"><input id="searchBtn" type="image" src="/images/search.png"></a>
+    <input type="text" placeholder="Search..">
+    {{#if user}}
+        <a href="/createPost/{{user}}" class="rightHeader">New Post</a>
+        <div class="profileBtn">
+            <button class="dropbtn" class="rightHeader">Profile</button>
+                        
+            <div class="dropdown">
+                <a href="/viewProfile/{{user}}">My Profile</a>
+                <a href="index.html">Log Out</a>
+            </div>
+        </div>
+        <a href="indexLoggedIn.html" class="rightHeader">Home</a>
+        {{else}}
+            <a href="register.html" class="rightHeader">Register</a>
+            <a href="indexLoggedIn.html" class="rightHeader">Home</a>
+    {{/if}}
+   
+</div>
