@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width">
+    <title>Home</title>
+    <link href="/css/style.css" rel="stylesheet" type="text/css" >
+  </head>
+  <body>
+        <div class="header">
+			
+            
+            {{#if details.user}}
+                <a href="/about/{{details.user}}"><img src="/images/logo.png" id="logo"></a>
+                <a href="/search/{{details.user}}" class="rightHeader">Search</a>
+                <a href="/createPost/{{details.user}}" class="rightHeader">New Post</a>
+                <div class="profileBtn">
+                    <button class="dropbtn" class="rightHeader">Profile</button>
+                    
+                    <div class="dropdown">
+                        <a href="/getViewProfile/{{details.user}}">My Profile</a>
+                        <a href="/home">Log Out</a>
+                    </div>
+                </div>
+                
+                <a href="/home/{{details.user}}" class="rightHeader">Home</a>
+            {{else}}
+				<a href="/about"><img src="/images/logo.png" id="logo"></a>
+                <a href="/search" class="rightHeader">Search</a>
+                <a href="/register" class="rightHeader">Register</a>
+                <a href="/login" class="rightHeader">Login</a>
+                <a href="/home" class="rightHeader">Home</a>
+                
+            {{/if}}
+
+            
+            
+        </div>
+		
+		<div class="content">
+            <h1>What's new</h1>
+            <div class="gallery">
+                <table>
+
+                    
+                    <tr>
+                    
+                    {{#each details.posts}}
+                    
+                        {{#if (firstInRow @index) }}
+                            </tr>
+                            <tr>
+                            <td><a href="/viewPost/{{postid}}/{{../details.user}}"><img src="/uploads/{{image.name}}"></a></td>
+                        {{else}}
+                            <td><a href="/viewPost/{{postid}}/{{../details.user}}"><img src="/uploads/{{image.name}}"></a></td>
+                        {{/if}}
+                    {{/each}}
+                    </tr>
+                    
+                    
+
+
+                    </tr>
+                </table>
+            </div>
+		</div>
+  </body>
+</html>
+

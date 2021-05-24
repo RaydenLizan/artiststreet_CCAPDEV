@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width">
+    <title>Edit Profile</title>
+    <link href="/css/style.css" rel="stylesheet" type="text/css" >
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js" type="text/javascript"></script>
+		<script src="/js/editProfile.js"></script>
+        {{!-- <script src="editProfile2.js"></script> --}}
+  </head>
+  <body>
+  <div class="header">
+        {{#if user}}
+                <a href="/about/{{user}}"><img src="/images/logo.png" id="logo"></a>
+                <a href="/search/{{user}}" class="rightHeader">Search</a>
+                <a href="/createPost/{{user}}" class="rightHeader">New Post</a>
+                <div class="profileBtn">
+                    <button class="dropbtn" class="rightHeader">Profile</button>
+                    
+                    <div class="dropdown">
+                        <a href="/getViewProfile/{{user}}">My Profile</a>
+                        <a href="/home">Log Out</a>
+                    </div>
+                </div>
+                
+                <a href="/home/{{user}}" class="rightHeader">Home</a>
+            {{else}}
+				<a href="/about"><img src="/images/logo.png" id="logo"></a>
+                <a href="/search" class="rightHeader">Search</a>
+                <a href="/register" class="rightHeader">Register</a>
+                <a href="/login" class="rightHeader">Login</a>
+                <a href="/home" class="rightHeader">Home</a>
+                
+            {{/if}}
+    </div>
+    <div class="bg">
+      
+      
+      <div class="container">
+        <div class="row">
+          <div class="summary">
+            <div> 
+               {{!-- class="picHolder" --}}
+              <img id="avatarPic" class="picHolder" src="{{def_url avatar}}">
+              {{!-- id="profPic" --}}
+              <div >
+              </div>
+            </div>
+            <h1 id="editUsername" class="txt">{{username}}</h1>
+            <form method="post" class="changePic" action="/uploadPic/{{username}}" enctype="multipart/form-data"><!--  action="/uploadPic" -->
+                <label class="txt" for="uploadPic">Select image to change then<br> click upload to save avatar:</label>
+                <input type="file" id="uploadPic" name="uploadPic" accept=".jpg, .jpeg, .png" required>
+                <p class="txt" id="errPic"></p>
+                <input id="uploadBtn" class="submit" type="submit" value="Upload">
+            </form>
+            <div id="lvl">
+              <h2 class="txt">LV. {{level}}</h2>
+            </div>
+            <label class="txt" for="exp">EXP:</label>
+            <progress class="exp" value="{{expNum}}" max="100">
+              45/100
+            </progress>
+            <label class="txt" for="exp">{{expNum}}/100</label>
+            
+          </div>
+          <div class="bigBox">
+            <div class="save">
+            <!-- <a href="/getViewProfile/{{username}}"> -->
+              <button id="saveBtn" class="editBtn" class="txt">Save</button>
+            <!-- </a> -->
+            </div>
+            <h1 class="info">Edit Profile</h1>
+            <div class="infoBox">
+              <ul class="infoLabels">
+                
+                <li class="item">
+                  <p class="label">E-mail</p>
+                </li>
+                <li class="item">
+                  <p class="label">Art Specialty</p>
+                </li>
+                <li class="item">
+                  <p class="label">Description</p>
+                </li>
+                <li class="item">
+                    <p class="label">New Password</p>
+                  </li>
+                  <li class="item">
+                    <p class="label">Confirm Password</p>
+                  </li>
+              </ul>
+              <ul class="infoLabels">
+                <li class="item">
+                 
+                </li>
+                 <form method="get" action="/updateProfile">
+                 <input type="hidden" id="hidUsername2" value="{{username}}"> 
+                 <input type="hidden" id="hidPw2" value="{{password}}"> 
+                  <input type="hidden" id="hidLvl2" value="{{level}}"> 
+                  <input type="hidden" id="hidExp2" value="{{expNum}}"> 
+                  <input type="hidden" id="hidSpec2" value="{{spec}}"> 
+                  <input type="hidden" id="hidDesc2" value="{{desc}}"> 
+                  <input type="hidden" id="hidAvatar2" value="{{avatar}}"> 
+                <li class="item">
+                    <input type="text" id="editEmail" class="editTxt" placeholder="{{email}}" maxlength="25" size="25">
+                </li>
+                <li class="item">
+                    <input type="text" id="editSpec" class="editTxt" placeholder="{{spec}}" maxlength="25" size="25">
+                </li>
+                <li class="item">
+                    <textarea id="editDesc" placeholder="{{desc}}"></textarea>
+                </li>
+                <li class="item">
+                    <input type="password" name="password" id="editPsword" placeholder="Type here to change password." class="editTxt" maxlength="25" size="25" >
+                </li>
+                <li class="item">
+                  <input type="password" id="confirmPsword" class="editTxt"  maxlength="25" size="25" >
+                    </form>
+                </li>
+              </ul>
+
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

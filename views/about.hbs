@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width">
+    <title>Login</title>
+    <link href="/css/style.css" rel="stylesheet" type="text/css" >
+  </head>
+  <body>
+        <div class="header">
+            {{#if user}}
+                <a href="/about/{{user}}"><img src="/images/logo.png" id="logo"></a>
+                <a href="/search/{{user}}" class="rightHeader">Search</a>
+                <a href="/createPost/{{user}}" class="rightHeader">New Post</a>
+                <div class="profileBtn">
+                    <button class="dropbtn" class="rightHeader">Profile</button>
+                    
+                    <div class="dropdown">
+                        <a href="/getViewProfile/{{user}}">My Profile</a>
+                        <a href="/home">Log Out</a>
+                    </div>
+                </div>
+                
+                <a href="/home/{{user}}" class="rightHeader">Home</a>
+            {{else}}
+				<a href="/about"><img src="/images/logo.png" id="logo"></a>
+                <a href="/search" class="rightHeader">Search</a>
+                <a href="/register" class="rightHeader">Register</a>
+                <a href="/login" class="rightHeader">Login</a>
+                <a href="/home" class="rightHeader">Home</a>
+                
+            {{/if}}
+        </div>
+		
+		<div class="content">
+			<h1>The following npm packages were used:</h1>
+			<div class="about">
+				
+				<ul>npm install mongoose --save</ul>
+				<ul>npm install --save multer</ul>
+				<ul>npm install uuid</ul>
+				<ul>npm install dotenv</ul>
+				<ul>npm install express --save</ul>
+				<ul>npm install mongodb --save</ul>
+				<ul>npm install hbs</ul>
+				<ul>npm install body-parser</ul>
+				<ul>npm install bcrypt</ul>
+			</div>	
+		</div>
+  </body>
+</html>
+

@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width">
+    <title>View Profile</title>
+    <link href="/css/style.css" rel="stylesheet" type="text/css" >
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js" type="text/javascript"></script>
+		<script src="/js/viewProfile.js"></script>
+        {{!-- <script src="viewProfile2.js"></script> --}}
+  </head>
+  <body>
+    <div class="header">
+            {{#if user}}
+                <a href="/about/{{user}}"><img src="/images/logo.png" id="logo"></a>
+                <a href="/search/{{user}}" class="rightHeader">Search</a>
+                <a href="/createPost/{{user}}" class="rightHeader">New Post</a>
+                <div class="profileBtn">
+                    <button class="dropbtn" class="rightHeader">Profile</button>
+                    
+                    <div class="dropdown">
+                        <a href="/getViewProfile/{{user}}">My Profile</a>
+                        <a href="/home">Log Out</a>
+                    </div>
+                </div>
+                
+                <a href="/home/{{user}}" class="rightHeader">Home</a>
+            {{else}}
+				<a href="/about"><img src="/images/logo.png" id="logo"></a>
+                <a href="/search" class="rightHeader">Search</a>
+                <a href="/register" class="rightHeader">Register</a>
+                <a href="/login" class="rightHeader">Login</a>
+                <a href="/home" class="rightHeader">Home</a>
+                
+            {{/if}}
+    </div>
+    <div class="bg">
+      
+      
+      
+      <div class="container">
+        <div class="row">
+          <div class="summary">
+            {{!-- <div {{!class="picHolder" id="profPic"}}> --}}
+              <div >
+               <img class="picHolder" src="{{def_url avatar}}">
+              </div>
+            {{!-- </div> --}}
+            <h1 id="username" class="txt">{{username}}</h1>
+            <div id="lvl">
+              <h2 id="lvltxt" class="txt">LV. {{level}}</h2>
+            </div>
+            
+            <label class="txt" for="exp">EXP:</label>
+            <progress class="exp" value="{{expNum}}" max="100">
+              45/100
+            </progress>
+            <label class="txt" for="exp">{{expNum}}/100</label>
+            
+          </div>
+          <div class="bigBox">
+            <div class="edit">
+              {{!-- <a href="editProfile.html"> --}}
+                <a href="/getEditProfile/{{username}}">
+                <button id="editBtn" class="editBtn" class="txt">Edit Profile</button>
+              </a>
+              <button id="delBtn" class="editBtn" class="txt">Delete Account </button>
+              <form method="post" >
+                
+                {{!-- action="/index" --}}
+              <input type="hidden" name="hidUsername" value="{{username}}">
+              <input type="hidden" id="hidPw" name="hidPw" value="{{password}}">
+              <input type="hidden" id="hidLvl" value="{{level}}"> 
+              <input type="hidden" id="hidExp" value="{{expNum}}"> 
+              <input type="hidden" id="hidSpec" value="{{spec}}"> 
+              <input type="hidden" id="hidDesc" value="{{desc}}"> 
+              <input type="hidden" id="hidAvatar" value="{{avatar}}"> 
+              {{!-- <button id="delBtn" class="editBtn" class="txt">Delete Account </button> --}}
+              </form>
+              </div>
+            <h1 class="info">User Profile</h1>
+            <div class="infoBox">
+              <ul class="infoLabels">
+                
+                <li class="item">
+                  <p class="label">E-mail</p>
+                </li>
+                <li class="item">
+                  <p class="label">Art Specialty</p>
+                </li>
+                <li class="item">
+                  <p class="label">Description</p>
+                </li>
+              </ul>
+              <ul id="infoList" class="infoLabels">
+                
+                <li class="item">
+                  <p id="emailInfo" class="infoItem">{{email}}</p>
+                </li>
+                <li class="item">
+                  <p id="specInfo" class="infoItem">{{spec}}</p>
+                </li>
+                <li class="item">
+                  <p id="descInfo" class="infoItem">{{desc}}</p>
+                </li>
+              </ul>
+
+            </div>
+          </div>
+        </div>
+        <div class="postBox">
+          <h1 class="info" id="recent">Your Recent Posts</h1>
+          <table id="postGrid">
+              <tr id="postRow1"  class="row">
+                  {{!-- <td><a href="viewPost.html" target="_blank"><img class="artPost" src="poof2.PNG" alt="Pixel Art 1" height="200" width="170"></td> --}}
+
+              </tr>
+            
+            </a>
+            </div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

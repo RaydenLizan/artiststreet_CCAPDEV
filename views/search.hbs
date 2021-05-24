@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width">
+    <title>Home</title>
+    <link href="/css/style.css" rel="stylesheet" type="text/css" >
+  </head>
+  <body>
+        <div class="header">
+            {{#if user}}
+                <a href="/about/{{user}}"><img src="/images/logo.png" id="logo"></a>
+                <a href="/search/{{user}}" class="rightHeader">Search</a>
+                <a href="/createPost/{{user}}" class="rightHeader">New Post</a>
+                <div class="profileBtn">
+                    <button class="dropbtn" class="rightHeader">Profile</button>
+                    
+                    <div class="dropdown">
+                        <a href="/getViewProfile/{{user}}">My Profile</a>
+                        <a href="/home">Log Out</a>
+                    </div>
+                </div>
+                
+                <a href="/home/{{user}}" class="rightHeader">Home</a>
+            {{else}}
+				<a href="/about"><img src="/images/logo.png" id="logo"></a>
+                <a href="/search" class="rightHeader">Search</a>
+                <a href="/register" class="rightHeader">Register</a>
+                <a href="/login" class="rightHeader">Login</a>
+                <a href="/home" class="rightHeader">Home</a>
+                
+            {{/if}}
+
+            
+            
+        </div>
+		
+		<div class="content">
+            <form method="get" action="/searchEnter/{{user}}" id="searchForm">
+            <input id="search" type="text" placeholder="Search" name="search" required>
+            <select id="option" name="option">
+                <option value="users" required>Users</option>
+                <option value="posts">Posts</option>
+            </select>
+            <input type="submit" src="search.png">
+            </form>
+            <div class="gallery">
+                <table>
+
+                    
+                    <tr>
+                    {{#if posts}}
+                        {{#each posts}}
+                        
+                            {{#if (firstInRow @index) }}
+                                </tr>
+                                <tr>
+                                <td><a href="/viewPost/{{postid}}/{{../user}}"><img src="/uploads/{{image.name}}"></a></td>
+                            {{else}}
+                                <td><a href="/viewPost/{{postid}}/{{../user}}"><img src="/uploads/{{image.name}}"></a></td>
+                            {{/if}}
+                        {{/each}}
+                        
+                    {{else}}
+                        {{#if users}}
+                            {{#each users}}
+                            
+                                {{#if (firstInRow @index) }}
+                                    </tr>
+                                    <tr>
+                                    {{#if (equal ../user username)}}
+                                        <td><a href="/getViewProfile/{{../user}}"><img src="{{def_url avatar.name}}"></a><p>{{username}}</p></td>
+                                    {{else}}
+                                        <td><a href="/getGuestViewProfile/{{username}}/{{../user}}"><img src="{{def_url avatar.name}}"></a><p>{{username}}</p></td>
+                                    {{/if}}
+                                {{else}}
+                                    {{#if (equal ../user username)}}
+                                        <td><a href="/getViewProfile/{{../user}}"><img src="{{def_url avatar.name}}"></a><p>{{username}}</p></td>
+                                    {{else}}
+                                        <td><a href="/getGuestViewProfile/{{username}}/{{../user}}"><img src="{{def_url avatar.name}}"></a><p>{{username}}</p></td>
+                                    {{/if}}
+                                {{/if}}
+                            {{/each}}
+                        {{else}}
+                            {{#if nothing}}
+                            <td><p>Can't find anything.</p></td>
+                            {{/if}}
+                        {{/if}}
+                        
+                    {{/if}}
+                    
+                    </tr>
+                    
+                    
+
+                    
+                    
+
+                    </tr>
+                </table>
+            </div>
+           
+		</div>
+  </body>
+</html>
+

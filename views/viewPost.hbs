@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width">
+		<title>View Post</title>
+		<link href="/css/style.css" rel="stylesheet" type="text/css">
+		<script src="https://code.jquery.com/jquery-3.4.1.min.js" type="text/javascript"></script>
+		<script type="text/javascript" src="/js/viewPostJS.js"></script>
+	</head>
+	
+	<body>
+		<div class="header">
+            {{#if user}}
+                <a href="/about/{{user}}"><img src="/images/logo.png" id="logo"></a>
+                <a href="/search/{{user}}" class="rightHeader">Search</a>
+                <a href="/createPost/{{user}}" class="rightHeader">New Post</a>
+                <div class="profileBtn">
+                    <button class="dropbtn" class="rightHeader">Profile</button>
+                    
+                    <div class="dropdown">
+                        <a href="/getViewProfile/{{user}}">My Profile</a>
+                        <a href="/home">Log Out</a>
+                    </div>
+                </div>
+                
+                <a href="/home/{{user}}" class="rightHeader">Home</a>
+            {{else}}
+				<a href="/about"><img src="/images/logo.png" id="logo"></a>
+                <a href="/search" class="rightHeader">Search</a>
+                <a href="/register" class="rightHeader">Register</a>
+                <a href="/login" class="rightHeader">Login</a>
+                <a href="/home" class="rightHeader">Home</a>
+                
+            {{/if}}
+   		</div>
+		
+		<div class="createPost">
+			<input type="hidden" name="postid" id="postid" value="{{postid}}">
+			<input type="hidden" name="owner" id="owner" value="{{owner}}">
+			<input type="hidden" name="cmt" id="cmt" value="{{commentsids}}">
+
+			<input type="hidden" name="username" id="viewer"value="{{user}}">
+			<input type="hidden" name="level" id="viewerlvl" value="{{userlvl}}">
+			<input type="hidden" name="userpic" id="viewerPic" value="{{userImg}}">	
+			<input type="hidden" name="exp" id="exp" value="{{userExp}}">
+
+			<div class="viewPostHeader">
+				<div class="updatePost">
+					<button class="updatePostBtn">...</button>
+					<div class="updatePostContent">
+						<a href="/editPost/{{postid}}/{{user}}" id="editPost">Edit</a>
+						<a href="/getViewProfile/{{owner}}" id="delPost">Delete</a>
+					</div>
+				</div>	
+					
+				<div class="userInfo">
+					<img src="{{def_url owner_image}}" alt="{{owner}}"> 
+					<p class="username">{{owner}}</p>
+					<p class="lvl">LV. {{level}}</p>
+				</div>
+
+			</div>
+			
+			<div class="tag">
+				<p>Category:</p>
+				<p class="box">{{category}}</p>
+			</div>
+		
+			<p>{{desc}}</p>
+			
+			<div class="artwork">
+				<img src="{{img_url image}}" alt="{{image}}" width="100%">
+			</div>
+			
+			<hr>
+			<div class="like">
+				<button id="upvoteBtnM"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-up-square" viewBox="0 0 16 16">
+<path fill-rule="evenodd" d="M15 2a1 1 0 0 0-1-1H2a1 1 0 0 0-1 1v12a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V2zM0 2a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V2zm8.5 9.5a.5.5 0 0 1-1 0V5.707L5.354 7.854a.5.5 0 1 1-.708-.708l3-3a.5.5 0 0 1 .708 0l3 3a.5.5 0 0 1-.708.708L8.5 5.707V11.5z"/>
+</svg> Upvote</button>
+				<p id="upvoteM">{{upvote}}</p>
+				<input type="hidden" id="upvotersM" name="upvotersM" value="{{upvoters}}">
+
+				<button id="downvoteBtnM"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-down-square" viewBox="0 0 16 16">
+<path fill-rule="evenodd" d="M15 2a1 1 0 0 0-1-1H2a1 1 0 0 0-1 1v12a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V2zM0 2a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V2zm8.5 2.5a.5.5 0 0 0-1 0v5.793L5.354 8.146a.5.5 0 1 0-.708.708l3 3a.5.5 0 0 0 .708 0l3-3a.5.5 0 0 0-.708-.708L8.5 10.293V4.5z"/>
+</svg> DownVote</button>
+				<p id="downvoteM">{{downvote}}</p>
+				<input type="hidden" id="downvotersM" name="downvotersM" value="{{downvoters}}">
+			</div>
+			<hr>
+			<p>Comments</p>
+			<div class="comments">
+				
+				{{#if user}}
+					<!-- user is logged in -->
+					<img src="{{def_url userImg}}" alt="{{user}}">
+					<textarea placeholder="Write a comment..." id="userComment"></textarea>
+					<!-- <input id="commentPost" type="submit" value="Post"> -->
+					<button id="commentPost">Post</button>
+					<br>
+
+				{{else}}
+					<!-- guest is logged in -->
+					<img src="/images/defaultBlue.png" alt="default">
+					<p>You have to login in order to comment</p>
+					<br>
+				{{/if}}
+				<!-- <hr style="border-top: 1px solid #d3d3d3;"> -->	
+
+				<div id="space">
+					{{#each comments}}
+						{{>comments}} <br>
+					{{/each}}
+				</div>
+				
+				
+			</div>
+		</div>
+	</body>
+</html>

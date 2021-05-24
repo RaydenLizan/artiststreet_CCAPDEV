@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width">
+    <title>Login</title>
+    <link href="/css/style.css" rel="stylesheet" type="text/css" >
+  </head>
+  <body>
+        <div class="header">
+            <a href="/about"><img src="/images/logo.png" id="logo"></a>
+            <a href="/register" class="rightHeader">Register</a>
+            <a href="/home" class="rightHeader">Home</a>
+
+            
+        </div>
+		
+		<div class="content">
+            <div class="loginForm">
+                <form method="post" action="/login">
+                <p>Login</p><hr>
+                <input type="text" placeholder="Username" name="username" required><br>
+                <input type="password" placeholder="Password" name="password" required><br>
+				{{#if wrong}}
+                <p id="error">Invalid Credentials</p>
+				{{/if}}
+                <input type="submit" value="Login">
+                </form>
+			</div>
+		</div>
+  </body>
+</html>
+

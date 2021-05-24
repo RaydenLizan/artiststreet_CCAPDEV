@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width">
+    <title>Register</title>
+    <link href="/css/style.css" rel="stylesheet" type="text/css" >
+    
+    
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js" type="text/javascript"></script>
+    <script>
+        $(document).ready(function(){
+        
+            $('#bluePic').css('border-color', 'white');
+        
+            $('#bluePic').on('click', function(){
+                $('#redPic').css('border-color', 'rgb(0, 0, 0, 0)');
+                $(this).css('border-color', 'white');
+                $('#picValue').val('Blue');
+            });
+            
+            $('#redPic').on('click', function(){
+                $('#bluePic').css('border-color', 'rgb(0, 0, 0, 0)');
+                $(this).css('border-color', 'white');
+                $('#picValue').val('Red');
+                
+            });
+            
+            $('#confirmpass').keyup(function () {
+                
+                if($('#password').val() != $('#confirmpass').val())
+                {
+                    $('#error').text('Password and Confirm Password are not the same');
+                    $('#register').prop('disabled', true);
+                    $('#register').css('cursor', 'default');
+                    $('#register').css('background-color', 'gray');
+                }
+                
+                else
+                {
+                
+                
+                    $.get('/checkUsername', {username: username}, function (result) {
+                        console.log("CHECK REF");
+                        if(result) {
+                            $('#error').text('That username is already used');
+                            $('#register').prop('disabled', true);
+                            $('#register').css('cursor', 'default');
+                            $('#register').css('background-color', 'gray');
+                        }
+                        
+                        else
+                        {
+                            $('#error').text('');
+                            $('#register').prop('disabled', false);
+                            $('#register').css('cursor', 'pointer');
+                            $('#register').css('background-color', 'white');
+                        }
+                    });
+                    
+                    
+                    $('#error').text('');
+                    $('#register').prop('disabled', false);
+                    $('#register').css('cursor', 'pointer');
+                    $('#register').css('background-color', 'white');
+                }
+            });
+            
+            $('#register').hover(function(){
+                $(this).css('background-color', '#181818');
+                $(this).css('color', 'white');
+                }, function(){
+                $(this).css('background-color', 'white');
+                $(this).css('color', 'black');
+
+            });
+            
+            $('#username').keyup(function () {
+                
+                var username = $('#username').val();
+
+
+                $.get('/checkUsername', {username: username}, function (result) {
+
+
+                    console.log("CHECK REF");
+                    if(result) {
+                        $('#error').text('That username is already used');
+                        $('#register').prop('disabled', true);
+                        $('#register').css('cursor', 'default');
+                        $('#register').css('background-color', 'gray');
+                    }
+
+
+                    else {
+                        if($('#password').val() != $('#confirmpass').val())
+                        {
+                            $('#error').text('Password and Confirm Password are not the same');
+                            $('#register').prop('disabled', true);
+                            $('#register').css('cursor', 'default');
+                            $('#register').css('background-color', 'gray');
+                        }
+                        
+                        else
+                        {
+                            $('#error').text('');
+                            $('#register').prop('disabled', false);
+                            $('#register').css('cursor', 'pointer');
+                            $('#register').css('background-color', 'white');
+                        }
+                    }
+                });
+            });
+            
+            
+        });
+    </script>
+  </head>
+  <body>
+        <div class="header">
+            <img src="/images/logo.png" id="logo">
+            <a href="/login" class="rightHeader">Login</a>
+            <a href="/home" class="rightHeader">Home</a>
+
+            
+        </div>
+		
+		<div class="content">
+            <div class="registerForm">
+                <form method="post" action="/register">
+                <table>
+                    <tr><td colspan=2>Register Account<hr></td></tr>
+                    <tr><td></td><td>Choose your profile pic</td></tr>
+                    <tr>
+                        <td><input type="text" placeholder="Username" name="username" id="username" required></td>
+                        <td rowspan=3 class="center"><img class="picOptions" src="/images/defaultBlue.png" id="bluePic"><img class="picOptions" src="/images/defaultRed.png" id="redPic"><input type="hidden" name="pic" id="picValue" value="Blue" required></td>
+                    </tr>
+                    <tr>
+                        <td><input type="text" placeholder="Email Address" name="email" required></td>
+                    </tr>
+                    <tr>
+                        <td><input type="text" placeholder="Art Specialty" name="specialty" required></td>
+                    </tr>
+                    <tr>
+                        <td><input type="password" placeholder="Password" name="password" id="password" required></td>
+                        <td><input type="password" placeholder="Confirm Password" name="confirmpass" id="confirmpass" required></td>
+                    </tr>
+                    
+                    <tr>
+                        <td colspan=2><textarea placeholder="Basic Description: Tell us more about yourself" name="desc" required></textarea></td>
+                    </tr>
+                    
+                    <tr class="center">
+                        <td colspan=2><p id="error"></p></td> 
+                        
+                    </tr>
+                    
+                    <tr class="center">
+                        <td colspan=2><input type="submit" value="Register!" id="register"></td> 
+                        
+                    </tr>
+                    </form>
+                </table>
+			</div>
+		</div>
+  </body>
+</html>
+

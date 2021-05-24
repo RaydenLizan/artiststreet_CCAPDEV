@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width">
+		<title>Create Post</title>
+		<link href="/css/style.css" rel="stylesheet" type="text/css">
+		<script src="https://code.jquery.com/jquery-3.4.1.min.js" type="text/javascript"></script>
+		<script type="text/javascript" src="/js/createPostJS.js"></script>
+		
+	</head>
+	
+	<body>
+		<div class="header">
+            {{#if user}}
+                <a href="/about/{{user}}"><img src="/images/logo.png" id="logo"></a>
+                <a href="/search/{{user}}" class="rightHeader">Search</a>
+                <a href="/createPost/{{user}}" class="rightHeader">New Post</a>
+                <div class="profileBtn">
+                    <button class="dropbtn" class="rightHeader">Profile</button>
+                    
+                    <div class="dropdown">
+                        <a href="/getViewProfile/{{user}}">My Profile</a>
+                        <a href="/home">Log Out</a>
+                    </div>
+                </div>
+                
+                <a href="/home/{{user}}" class="rightHeader">Home</a>
+            {{else}}
+				<a href="/about"><img src="/images/logo.png" id="logo"></a>
+                <a href="/search" class="rightHeader">Search</a>
+                <a href="/register" class="rightHeader">Register</a>
+                <a href="/login" class="rightHeader">Login</a>
+                <a href="/home" class="rightHeader">Home</a>
+                
+            {{/if}}
+   		</div>
+			
+		<div class="createPost">
+		
+			<div class="createPostHeader">
+				<h2>Create Post</h2>
+				<hr>
+			</div>
+			
+			<div class="userInfo">
+				<img src="{{def_url avatar}}" alt="{{username}}">
+				<p class="username">{{username}}</p>
+				<p class="lvl">LV. {{level}}</p>
+			</div>
+			
+			<br>
+			<br>
+			<form method="post" action="/uploadPost" enctype="multipart/form-data">
+				<input type="hidden" name="avatar" id="avatar" value="{{avatar}}">
+				<input type="hidden" name="username" id="username" value="{{username}}">
+				<input type="hidden" name="level" id="level" value="{{level}}">
+				
+				<label for="category">Category of Artwork: </label> 
+				<select id="category" name="category">
+					<option value="Graphic Design" selected>Graphic Design</option>
+					<option value="3D">3D</option>
+					<option value="Pixel">Pixel</option>
+					<option value="Painting">Painting</option>
+				</select>
+				<br>
+				<br>
+				
+				<div class="createDesc">
+					<textarea placeholder="Write a short description..." id="description" name="description"></textarea>
+				</div>
+				<br>
+				
+				<label for="uploadImage">Artwork: </label>
+				<input type="file" id="uploadImage" name="uploadImage" accept=".jpg, .jpeg, .png" required>
+				
+				<p id="errorImg"></p>
+			
+				<div class="uploadBtn">
+					<button id="upload" class="usbtn">Upload</button>
+				</div>
+			</form>
+		</div>
+	</body>
+</html>

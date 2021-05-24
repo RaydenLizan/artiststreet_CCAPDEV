@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width">
+		<title>Edit Post</title>
+		<link href="/css/style.css" rel="stylesheet" type="text/css">
+		<script src="https://code.jquery.com/jquery-3.4.1.min.js" type="text/javascript"></script>
+		<script type="text/javascript" src="/js/editPostJS.js"></script>
+	</head>
+	
+	<body>
+		<div class="header">
+            {{#if user}}
+                <a href="/about/{{user}}"><img src="/images/logo.png" id="logo"></a>
+                <a href="/search/{{user}}" class="rightHeader">Search</a>
+                <a href="/createPost/{{user}}" class="rightHeader">New Post</a>
+                <div class="profileBtn">
+                    <button class="dropbtn" class="rightHeader">Profile</button>
+                    
+                    <div class="dropdown">
+                        <a href="/getViewProfile/{{user}}">My Profile</a>
+                        <a href="/home">Log Out</a>
+                    </div>
+                </div>
+                
+                <a href="/home/{{user}}" class="rightHeader">Home</a>
+            {{else}}
+				<a href="/about"><img src="/images/logo.png" id="logo"></a>
+                <a href="/search" class="rightHeader">Search</a>
+                <a href="/register" class="rightHeader">Register</a>
+                <a href="/login" class="rightHeader">Login</a>
+                <a href="/home" class="rightHeader">Home</a>
+                
+            {{/if}}
+   		</div>
+			
+		<div class="createPost">
+		
+			<div class="createPostHeader">
+				<h2>Edit Post</h2>
+				<hr>
+			</div>
+			
+			<div class="userInfo">
+				<img src="{{def_url owner_image}}" alt="{{owner}}">
+				<p class="username"><b>{{owner}}</b></p>
+				<p class="lvl">LV. {{level}}</p>
+			</div>
+			<br>
+			<br>
+			<form id="editForm" action='/viewPost/{{postid}}/{{owner}}'>
+				<input type="hidden" name="postid" id="editpostid" value="{{postid}}">
+				<input type="hidden" name="username" id="editowner" value="{{owner}}">
+
+				<label for="editCategory">Category of Artwork: </label> 
+				<select id="editCategory" name="editCategory">
+					<option value="{{category}}" selected>{{category}}</option>
+				</select>
+				<br>
+				<br>
+				
+				<div class="createDesc">
+					<textarea placeholder="Write a short description..." id="editPDesc">{{desc}}</textarea>
+				</div>
+				<br>
+				<div class="artwork">
+					<img src="{{img_url image}}" alt="{{image}}" width="100%">
+				</div>
+				<br>
+				<div class="uploadBtn">
+					<button id="save" class="usbtn">Save</button>
+				</div>
+				
+			</form>
+		</div>
+	
+	</body>
+</html>
