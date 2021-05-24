@@ -20,3 +20,4 @@ npm install bcrypt
 ```
 4. Type in `node index.js` to start the web app
 5. Type in `http://localhost:3000/` in a browser to view the web app
+
